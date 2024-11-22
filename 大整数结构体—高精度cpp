@@ -1,0 +1,38 @@
+struct Bigint {
+	int b[1700], len;
+	Bigint(int x = 0) {
+		memset(b, 0, sizeof(b));
+		for (len = 1; x; len++) {
+			b[len] = x % 10, x /= 10;
+		}
+		len--;
+	}
+	int& operator[](int i) {
+		return b[i];
+	}
+	void flatten(int L) {
+		len = L;
+		for (int i = 1; i <= len; i++) {
+			b[i + 1] += b[i] / 10, b[i] %= 10;
+		}
+		for (; !b[len]; len--);
+	}
+	void print() {
+		for (int i = len; i >= 1; i--)cout << b[i];
+	}
+};
+Bigint operator*(Bigint a, int b) {
+	Bigint c;
+	int len = a.len;
+	for (int i = 1; i <= len; i++)
+		c[i] = a[i] * b;
+	c.flatten(len+11);
+	return c;
+}
+Bigint operator+(Bigint a, Bigint b) {
+	Bigint c;
+	int len = max(a.len, b.len);
+	for (int i = 1; i <= len; i++)c[i] = a[i] + b[i];
+	c.flatten(len + 1);
+	return c;
+}
