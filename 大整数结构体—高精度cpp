@@ -1,5 +1,5 @@
 struct Bigint {
-	int b[1700], len;
+	int b[1700], len;	//b的大小可根据具体的数的大小改
 	Bigint(int x = 0) {
 		memset(b, 0, sizeof(b));
 		for (len = 1; x; len++) {
